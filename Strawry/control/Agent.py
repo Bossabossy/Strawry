@@ -19,8 +19,7 @@ rList = []
 alpha=np.log(0.1)/num_episodes      # decay learning rate
 for i in range(num_episodes):
     lr= np.exp(alpha*i)  #decay learning rate
-    s = env.reset( temp=np.random.randint(low=10,high=21, size=1),
-                                          humi=np.random.randint(low=10,high=100, size=1),
+    s = env.reset( temp=get_temp(),humi=get_humi(),
                                           co2=350,
                                           light=np.random.randint(low=0,high=1, size=1),
                                           watp=np.random.randint(low=0,high=1, size=1)

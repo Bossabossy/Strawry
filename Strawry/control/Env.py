@@ -1,5 +1,6 @@
+import time
 import numpy as np 
-
+import reacon.Recon
 
 
 
@@ -17,8 +18,10 @@ class Env(object):
     def __init__(self):
         self.n_action=16
         self.n_state=500        
-        self.max_step=100
+        self.max_step=25
+        self.recon= Recon()
         self.reset()
+
 
             
     def get_state(self):        
@@ -42,8 +45,8 @@ class Env(object):
     
     
     def get_reward(self):
-        if self.t_temp-2<self.temp and self.temp<=self.t_temp+2:
-            if self.t_humi-10<self.humi and self.humi<=self.t_humi+10:
+        if self.t_temp-1<self.temp and self.temp<=self.t_temp+1:
+            if self.t_humi-5<self.humi and self.humi<=self.t_humi+5:
                 return 1         
         return 0
         #return np.log(np.sqrt(((self.t_temp-self.temp)**2)+((self.t_humi-self.humi)**2)))
@@ -59,18 +62,33 @@ class Env(object):
     def step(self,a):
         self.n_step+=1
         comp,mist,light,watp = self.int2code(a)
+        
         if comp==1:
-            self.humi-=5
-            self.temp-=1
+            self.recon.com_on()
+        else:
+            self.recon.com_off()
+    
         if mist==1:
-            self.humi+=5
+            self.recon.humi_on()
+        else :
+            self.recon.humi_off()
+       
         if light==1:
-            self.humi+=1
-            self.temp+=1
+            self.recon.light_on()
+        else:
+            self.recon.light_off()
+
         if watp==1:
-            self.humi+=1
+            self.recon.pump_on()
+        else:
+            self.recon.pump_off()
+
         if self.max_step <= self.n_step:
             self.done=1
+# go back and look for order of humi and temp
+        time.sleep(30)
+        self.temp,self.humi = #get_temp()
+        
         return self.get_state(), self.get_reward(), self.done, 0
     
     def render(self):
