@@ -89,7 +89,7 @@ import RPi.GPIO as GPIO
 
 
 class Recon(object):
-	def __init__(self, light_pin=9 ,pump_pin = 10, humi_pin = 11 , com_pin= 12 )
+	def __init__(self, light_pin=9 ,pump_pin = 10, humi_pin = 11 , com_pin= 8):
 		self.light_pin = light_pin
 		self.humi_pin = humi_pin
 		self.pump_pin = pump_pin
@@ -102,50 +102,50 @@ class Recon(object):
 		GPIO.setup(self.com_pin,GPIO.OUT)
 
 
-	def light_on(self)
-		
-		GPIO.output(self.light_pin, 0)
- 		print "light on"
-		
-
-	def light_off(self)
+	def light_on(self):
 		
 		GPIO.output(self.light_pin, 1)
- 		print "light off"
+		print ("light on")
 		
 
-	def humi_on(self)
+	def light_off(self):
 		
-		GPIO.output(self.humi_pin, 0)
- 		print "humi on"
+		GPIO.output(self.light_pin, 0)
+		print ("light off")
 		
 
-	def humi_off(self)
+	def humi_on(self):
 		
 		GPIO.output(self.humi_pin, 1)
- 		print "humi off"
-
- 	def pump_on(self)
-		
-		GPIO.output(self.pump_pin, 0)
- 		print "pump on"
+		print ("humi on")
 		
 
-	def pump_off(self)
+	def humi_off(self):
+		
+		GPIO.output(self.humi_pin, 0)
+		print ("humi off")
+
+	def pump_on(self):
 		
 		GPIO.output(self.pump_pin, 1)
- 		print "pump off"
-
- 	def com_on(self)
-		
-		GPIO.output(self.com_pin, 0)
- 		print "com on"
+		print ("pump on")
 		
 
-	def com_off(self)
+	def pump_off(self):
+		
+		GPIO.output(self.pump_pin, 0)
+		print ("pump off")
+
+	def com_on(self):
 		
 		GPIO.output(self.com_pin, 1)
- 		print "com off"
+		print ("com on")
+		
+
+	def com_off(self):
+		
+		GPIO.output(self.com_pin, 0)
+		print ("com off")
 
 
 

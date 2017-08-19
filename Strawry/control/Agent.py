@@ -2,7 +2,7 @@ import numpy as np
 import random
 np.set_printoptions(threshold=np.nan)
 from Strawry.env import Env 
-env = Env
+env = Env()
 
 
 
