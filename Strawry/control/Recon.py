@@ -1,93 +1,9 @@
 import time
 import os
 import sys
+import Adafruit_DHT
 import RPi.GPIO as GPIO
-
-# class Recon(object):
-	
-# 	GPIO.setmode(GPIO.BOARD)
-
-	
-
-
-# 	# relay for light 1
-# 	L_PIN = 9 
-# 	def GPIOsetup():
-# 		GPIO.setmode(GPIO.BCM)
-# 		GPIO.setup(L_PIN, GPIO.OUT)
-# 		GPIO.setwarnings(False)
-
-	
-# 	def lon():
-# 		
-
-
-# 	def l1off():
-# 		GPIO.output(L_PIN, 1)
-# 		print "light off"
-# 		return()
-
-
-	
-
-
-# 	# relay for PUMP
-# 	PUMP_PIN = 10 
-# 	def GPIOsetup():
-# 	GPIO.setmode(GPIO.BCM)
-# 	GPIO.setup(PUMP_PIN, GPIO.OUT)
-# 	GPIO.setwarnings(False)
-
-# 	def pumpon():
-# 	GPIO.output(PUMP_PIN, 0)
-# 	print "light on"
-# 	return()
-
-# 	def pumpoff():
-# 	GPIO.output(PUMP_PIN, 1)
-# 	print "light off"
-# 	return()
-	
-
-
-# 	# relay for humidity
-# 	HUMI_PIN = 11 
-# 	def GPIOsetup():
-# 	GPIO.setmode(GPIO.BCM)
-# 	GPIO.setup(HUMI_PIN, GPIO.OUT)
-# 	GPIO.setwarnings(False)
-
-# 	def humion():
-# 	GPIO.output(HUMI_PIN, 0)
-# 	print "light on"
-# 	return()
-
-# 	def humioff():
-# 	GPIO.output(HUMI_PIN, 1)
-# 	print "light off"
-# 	return()
-
-	
-
-
-# 	# relay for compressor
-# 	COM_PIN = 12 
-# 	def GPIOsetup():
-# 	GPIO.setmode(GPIO.BCM)
-# 	GPIO.setup(COM_PIN, GPIO.OUT)
-# 	GPIO.setwarnings(False)
-
-# 	def comon():
-# 	GPIO.output(COM_PIN, 0)
-# 	print "light on"
-# 	return()
-
-# 	def comoffs():
-# 	GPIO.output(COM_PIN, 1)
-# 	print "light off"
-# 	return()
-
-
+# output data section
 class Recon(object):
 	def __init__(self, light_pin=9 ,pump_pin = 10, humi_pin = 11 , com_pin= 8):
 		self.light_pin = light_pin
@@ -147,7 +63,24 @@ class Recon(object):
 		GPIO.output(self.com_pin, 0)
 		print ("com off")
 
+# import sys
 
+# import Adafruit_DHT
+
+# Input data section
+class SensorReader(object):
+	def __init__(self, sensor = 22 , pin = 4 ):
+		self.sensor = sensor
+		self.pin = pin
+
+	def read_DHT(self):
+		return Adafruit_DHT.read_retry(self.sensor,self.pin)
+
+	def get_temp(self):
+		return Adafruit_DHT.read_retry(self.sensor,self.pin)[1]
+
+	def get_humi(self):
+		return Adafruit_DHT.read_retry(self.sensor,self.pin)[0]
 
 
 
