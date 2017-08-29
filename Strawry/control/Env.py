@@ -92,9 +92,10 @@ class Env(object):
             self.recon.pump_off()
 
         if self.max_step <= self.n_step:
+
             self.done=1
-            
-        time.sleep(30)
+
+        
 
         self.temp = SensorReader.get_temp()
         self.humi = SensorReader.get_humi()
@@ -106,6 +107,8 @@ class Env(object):
              self.n_step, self.temp, self.humi, self.light, self.watp))
 
     def cycle(self):
+        cs=0
+        origin = datetime.now()
         if cs == 0:
             self.set_target(temp=18, humi= 80, light=1 ,watp =1)
             print("light on and pump on")
@@ -117,8 +120,8 @@ class Env(object):
         if cs == 1:
             self.set_target(temp=18, humi= 80, light=1 ,watp =0)
             print("light on and pump off")
-            if 6 <= (datetime.now()-origin).hours:
-                cs = 2
+            if 5 <= (datetime.now()-origin).minutes:
+                cs= 2
                 origin=datetime.now()
             else:
                 print("Morning time")
@@ -133,7 +136,7 @@ class Env(object):
         if cs == 3:
             self.set_target(temp=10, humi= 60, light=0 ,watp =0)
             print("light off and pump off")
-            if 18 <= (datetime.now()-origin).hours:
+            if 5 <= (datetime.now()-origin).minutes:
                 cs = 0
                 origin=datetime.now()
             else:

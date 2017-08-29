@@ -10,7 +10,11 @@ class Recon(object):
 		self.humi_pin = humi_pin
 		self.pump_pin = pump_pin
 		self.com_pin = com_pin
-		
+		self.last_com=datetime.now()
+		self.last_light=datetime.now()
+		self.last_pump=datetime.now()
+		self.last_humi=datetime.now()
+
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.light_pin,GPIO.OUT)
 		GPIO.setup(self.humi_pin,GPIO.OUT)
@@ -19,49 +23,57 @@ class Recon(object):
 
 
 	def light_on(self):
-		
-		GPIO.output(self.light_pin, 1)
-		print ("light on")
-		
+		if (datetime.now()-self.last_light).seconds>10:		
+			GPIO.output(self.light_pin, 1)
+			print ("light on")
+			self.last_light=datetime.now()
+
 
 	def light_off(self):
-		
-		GPIO.output(self.light_pin, 0)
-		print ("light off")
-		
+		if (datetime.now()-self.last_light).seconds>10:
+			GPIO.output(self.light_pin, 0)
+			print ("light off")
+			self.last_light=datetime.now()
+
 
 	def humi_on(self):
-		
-		GPIO.output(self.humi_pin, 1)
-		print ("humi on")
-		
+		if (datetime.now()-self.last_humi).seconds>30:
+			GPIO.output(self.humi_pin, 1)
+			print ("humi on")
+			self.last_humi=datetime.now()
+			
 
 	def humi_off(self):
-		
-		GPIO.output(self.humi_pin, 0)
-		print ("humi off")
+		if (datetime.now()-self.last_humi).seconds>30:
+			GPIO.output(self.humi_pin, 0)
+			print ("humi off")
+			self.last_humi=datetime.now()
 
 	def pump_on(self):
-		
-		GPIO.output(self.pump_pin, 1)
-		print ("pump on")
+		if (datetime.now()-self.last_humi).seconds>10:
+			GPIO.output(self.pump_pin, 1)
+			print ("pump on")
+			self.last_humi=datetime.now()
 		
 
 	def pump_off(self):
-		
-		GPIO.output(self.pump_pin, 0)
-		print ("pump off")
+		if (datetime.now()-self.last_pump).seconds>10:
+			GPIO.output(self.pump_pin, 0)
+			print ("pump off")
+			self.last_pump=datetime.now()
 
 	def com_on(self):
-		
-		GPIO.output(self.com_pin, 1)
-		print ("com on")
-		
+		if (datetime.now()-self.last_com).seconds>60:
+			GPIO.output(self.com_pin, 1)
+			print ("com on")
+			self.last_com=datetime.now()
 
 	def com_off(self):
-		
-		GPIO.output(self.com_pin, 0)
-		print ("com off")
+		if (datetime.now()-self.last_com).seconds>60:
+			GPIO.output(self.com_pin, 0)
+			print ("com off")
+			self.last_com=datetime.now()
+
 
 # import sys
 
