@@ -1,9 +1,25 @@
-from Recon import Recon
+#from Recon import Recon
 import time
-control = Recon()
+#control = Recon()
 
 
-control.light_on()
-control.pump_on()
-control.humi_on()
-control.com_on()
+#control.humi_off()
+#control.pump_off()
+#control.humi_off()
+#control.com_off()
+#time.sleep(10)
+#control.com_on()
+#time.sleep(10)
+#control.clean()
+time.sleep(20)
+import RPi.GPIO as GPIO
+pin=11
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(pin,GPIO.OUT)
+GPIO.output(pin, 1)
+time.sleep(1)
+GPIO.output(pin, 0)
+time.sleep(1)
+GPIO.output(pin, 1)
+time.sleep(5)
+GPIO.cleanup()
