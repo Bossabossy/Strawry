@@ -1,5 +1,6 @@
 import numpy as np
 import random
+#import Qmemo 
 from Env import Env 
 from Recon import SensorReader
 
@@ -19,7 +20,7 @@ memo = []
 rList = []
 
 alpha=np.log(0.1)/num_episodes      # decay learning rate
-while i in range(num_episodes):
+for i in range(num_episodes):
     lr= np.exp(alpha*i) + 0.1 #decay learning rate
     s = env.reset( temp=read.get_temp(),humi=read.get_humi(),light=0,watp=0)
                                             
@@ -28,7 +29,7 @@ while i in range(num_episodes):
     done=False
   
     while done==False:               #random action to get next state and action
-        np.load(Qmemo,Q)
+#        np.load(Qmemo,Q)
         if np.random.rand() < lr*0.01:
             a = np.random.randint(env.n_action)
         else:
@@ -48,13 +49,14 @@ while i in range(num_episodes):
 
         if done == True:
             break
-            if np.random.choice([True, False], p=[0.6, 0.4]) and len(memo) > 0:
+    if np.random.choice([True, False], p=[0.6, 0.4]) and len(memo) > 0:
         idx = np.random.choice(len(memo))
         pQ = memo[idx]
         Q = 0.1*pQ + 0.9*Q
-        np.save(Qmemo,Q)
+        
     
     rList.append(rAll)
+ #   np.save(Qmemo,Q)
         
 
     

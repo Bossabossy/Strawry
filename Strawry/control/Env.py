@@ -1,7 +1,7 @@
 import time
 import numpy as np 
 from datetime import datetime
-from Recon import SensorReader, Reacon
+from Recon import SensorReader, Recon
 
 
 class Env(object):
@@ -32,7 +32,7 @@ class Env(object):
         x2=self.cap(self.humi, 10, 100, 5)
         x3=self.light
         x4=self.watp
-        return int(x1*5*2*2 + x2*5*2*2 + x3*2*2 + x4*2 +x5)
+        return int(x1*5*2*2 + x2*5*2*2 + x3*2*2 + x4*2)
 
     
     def reset(self, temp=25, humi=50, light=0, watp=0):        
