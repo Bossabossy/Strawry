@@ -23,6 +23,7 @@ class Env(object):
         self.reset()
         self.cs=0
         self.origin=datetime.now()
+        self.read= SensorReader()
       
 
 
@@ -97,8 +98,8 @@ class Env(object):
 
         
 
-        self.temp = SensorReader.get_temp()
-        self.humi = SensorReader.get_humi()
+        self.temp = self.read.get_temp()
+        self.humi = self.read.get_humi()
         
         return self.get_state(), self.get_reward(), self.done, 0
     
@@ -112,7 +113,7 @@ class Env(object):
         if cs == 0:
             self.set_target(temp=18, humi= 80, light=1 ,watp =1)
             print("light on and pump on")
-            if 2 <= (datetime.now()-origin).minutes:
+            if 120 <= (datetime.now()-origin).seconds:
                 cs = 1
                 origin=datetime.now()
             else :
@@ -120,7 +121,7 @@ class Env(object):
         if cs == 1:
             self.set_target(temp=18, humi= 80, light=1 ,watp =0)
             print("light on and pump off")
-            if 5 <= (datetime.now()-origin).minutes:
+            if 300 <= (datetime.now()-origin).seconds:
                 cs= 2
                 origin=datetime.now()
             else:
@@ -128,7 +129,7 @@ class Env(object):
         if cs == 2:
             self.set_target(temp=10, humi= 60, light=0 ,watp =1)
             print("light off and pump on")
-            if 2 <= (datetime.now()-origin).minute:
+            if 120 <= (datetime.now()-origin).seconds:
                 cs = 3
                 origin=datetime.now()
             else :
@@ -136,7 +137,7 @@ class Env(object):
         if cs == 3:
             self.set_target(temp=10, humi= 60, light=0 ,watp =0)
             print("light off and pump off")
-            if 5 <= (datetime.now()-origin).minutes:
+            if 300 <= (datetime.now()-origin).seconds:
                 cs = 0
                 origin=datetime.now()
             else:

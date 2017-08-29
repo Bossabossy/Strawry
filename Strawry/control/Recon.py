@@ -3,9 +3,10 @@ import os
 import sys
 import Adafruit_DHT
 import RPi.GPIO as GPIO
+from datetime import datetime
 # output data section
 class Recon(object):
-	def __init__(self, light_pin=9 ,pump_pin = 10, humi_pin = 11 , com_pin= 8):
+	def __init__(self, light_pin=11 ,pump_pin = 10, humi_pin = 9 , com_pin= 8):
 		self.light_pin = light_pin
 		self.humi_pin = humi_pin
 		self.pump_pin = pump_pin
