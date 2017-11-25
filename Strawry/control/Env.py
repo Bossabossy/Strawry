@@ -121,7 +121,7 @@ class Env(object):
         if cs == 1:
             self.set_target(temp=18, humi= 80, light=1 ,watp =0)
             print("light on and pump off")
-            if 300 <= (datetime.now()-origin).seconds:
+            if 21420 <= (datetime.now()-origin).seconds:
                 cs= 2
                 origin=datetime.now()
             else:
@@ -137,7 +137,7 @@ class Env(object):
         if cs == 3:
             self.set_target(temp=10, humi= 60, light=0 ,watp =0)
             print("light off and pump off")
-            if 300 <= (datetime.now()-origin).seconds:
+            if 64620 <= (datetime.now()-origin).seconds:
                 cs = 0
                 origin=datetime.now()
             else:
